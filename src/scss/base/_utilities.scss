@@ -2,8 +2,18 @@ body.dev {
     .fixed {
         position: relative !important;
     }
-    .js-after-fixed{
+
+    .js-after-fixed {
         display: none !important;
+    }
+}
+
+* {
+    box-sizing: border-box;
+
+    &:before,
+    &:after {
+        box-sizing: border-box;
     }
 }
 

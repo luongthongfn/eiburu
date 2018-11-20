@@ -1,4 +1,5 @@
 //maps
+
 window.myMap = function myMap() {
 
     var mapElem = document.getElementById("googleMap");
