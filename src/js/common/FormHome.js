@@ -1,111 +1,38 @@
 //contact-form
+// import { numberFormat} from '../helper/helper.js';
+
 $(function () {
+    var Postal_code = require('japan-postal-code'),
+        code, addressResponse,
+        Prefecture = $('#prefecture'),
+        Address = $('#address');
 
-    var $reqVal,
-        $nameVal,
-        $companyVal,
-        $emailVal,
-        $questionVal;
-
-    //dialog confirm send mail
-    var submitCallBack = function () {
-        $('.btn_accept_send .fa').addClass('fa-spin fa-spinner');
-        $('.before_submit, .after_submit').hide();
-        $('.after_submit').show();
-
-        $.ajax({
-            url: 'gmail.php',
-            type: 'POST',
-            data: {
-                send_mail: true,
-                request: $reqVal,
-                name: $nameVal,
-                company: $companyVal,
-                email: $emailVal,
-                question: $questionVal,
-            },
-            success: function (res) {
-                $('.btn_accept_send .fa').removeClass('fa-spinner fa-spin').addClass('fa-check');
-                document.getElementsByClassName("contact--form")[0].reset();
-            },
-            error: function (xhr, status, err) {
-                console.log(xhr, status, err);
-                $('.btn_accept_send .fa').removeClass('fa-spinner fa-spin').addClass('fa-exclamation');
-            }
-        })
-
-    }
-
-    var closeCallBack = function () {
-        $('#js_mail_result').removeClass('show');
-    }
-
-    var setPreviewValue = function () {
-        $reqVal = $('input[name = "request_hidden"]').val(); //from custom-select
-        $nameVal = $('#name').val();
-        $companyVal = $('#company').val();
-        $emailVal = $('#email').val();
-        $questionVal = $('#question').val();
-
-        $('.review-request .review-text').text($reqVal);
-        $('.review-name .review-text').text($nameVal);
-        $('.review-company .review-text').text($companyVal);
-        $('.review-email .review-text').text($emailVal);
-        $('.review-question .review-text').text($questionVal);
-    }
-
-    //validate
-    $.validator.setDefaults({
-        submitHandler: function () {
-            alert("submitted!");
-        }
-    });
     $("#contact--form").validate({
-        focusInvalid: false,
+        focusInvalid: true,
         ignore: '',
         rules: {
             //key is name of input
-            request_hidden: "required",
             name: "required",
-            company: "required",
+            phone: {
+                required: true,
+                number: true
+            },
             email: {
                 required: true,
                 email: true,
                 maxlength: 255
+            },
+            re_email: {
+                required: true,
+                equalTo: "#email"
             },
             question: {
                 required: true,
                 minlength: 2
             }
         },
-        messages: {
-            //key is name of input
-            request_hidden: "",
-            // request: "お問い合わせ項目を選択してください。",
-            name: "お名前を入力してください。",
-            company: "貴社名を入力してください。",
-            email: {
-                required: "メールアドレスを入力してください。",
-                email: "正しいメールアドレスを入力してください。",
-                maxlength: "正しいメールアドレスを入力してください。"
-            },
-            question: {
-                required: "お問い合わせ内容を入力してください。",
-                minlength: "少なくとも二文字以上"
-            }
-        },
-
-        errorElement: "span",
-        errorContainer: '.notice-error',
         errorPlacement: function (error, element) {
-            // Add the class to the error element
-            error.addClass("required-notice");
-
-            if (element.prop("type") === "checkbox") {
-                error.insertAfter(element.parent("label"));
-            } else {
-                error.insertAfter(element);
-            }
+            return;
         },
         highlight: function (element, errorClass, validClass) {
             $(element).addClass("has-error");
@@ -113,32 +40,16 @@ $(function () {
         unhighlight: function (element, errorClass, validClass) {
             $(element).removeClass("has-error")
         },
-        submitHandler: function () {
-            setPreviewValue();
-            $('#js_contact_confirm').addClass('show');
-            $('.before_submit, .after_submit').hide();
-            $('.before_submit').show();
-        }
     });
-
-    // --------------------- add event ---------------------------------
-    // --------------------- add event ---------------------------------
-    $('.btn_accept_send').click(function () {
-        submitCallBack();
-
-    })
-
-    $('.close_contact_form').click(function () {
-        $('.before_submit, .after_submit').addClass('hidden')
-        $('#js_contact_confirm').removeClass('show');
-    })
-
-    $('.btn_cancel_send').click(function () {
-        closeCallBack();
-        $('#js_contact_confirm').removeClass('show');
-    })
-
-    $(document).on('click', '.contact_reset', function () {
-        $('#js_mail_result').removeClass('show')
+    //get address from postal-code
+    $('.get-zipcode').click(function (e) {
+        e.preventDefault();
+        code = $('#zipcode').val(),
+            Postal_code.get(code, function (address) {
+                // console.log(address)
+                addressResponse = address.prefecture + ', ' + address.city + ', ' + address.street;
+                addressResponse = addressResponse.replace(/,\s*$/, ""); // remove last comma
+                Address.val(addressResponse);
+            });
     })
 })

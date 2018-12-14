@@ -5,55 +5,50 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
     pug = require('gulp-pug'),
+    imagemin = require('gulp-imagemin'),
     browserSync = require('browser-sync').create(),
     log = require('gulplog'),
-    babel = require('gulp-babel'),
-    Gbrowserify = require('gulp-browserify'),
+    uglify = require('gulp-uglify'),
     browserify = require('browserify'),
-    vinyltransform = require('vinyl-transform'),
+    globalShim = require('browserify-global-shim').configure({
+        'jquery': '$',
+    }),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),
-    babelify = require('babelify'),
-    concat = require('gulp-concat'),
     globby = require('globby'),
     through = require('through2'),
-    streamify = require('gulp-streamify'),
-
-
-
+    
+    distFolder = "dist",
+    mapsFolder = '../maps',
     path = {
         scss: {
-            src: './src/scss/**/*.scss',
-            dest: './dist/css',
-            dist: './dist/css/**/*/.css'
+            src: `./src/scss/**/*.scss`,
+            dest: `./${distFolder}/css`,
+            dist: `./dist/css/**/*/.css`
         },
         js: {
-            src: './src/js/**/*.js',
-            dest: './dist/js',
-            dist: './dist/js/*.js'
+            src: `./src/js/**/*.js`,
+            dest: `./${distFolder}/js`,
+            dist: `./${distFolder}/js/*.js`
         },
         pug: {
-            src: './src/pug/pages/*.{pug,html}',
-            dest: './dist/',
-            dist: './dist/*.{html,htm}'
+            src: `./src/pug/pages/*.pug`,
+            dest: `./${distFolder}/`,
+            dist: `./${distFolder}/*.{html,htm}`
         },
         img: {
-            src: './src/img/*.{png,jpg,gif}',
-            src: './dist/img',
-            dest: './dist/img/*.{png|jpg}'
+            src: `./src/img/*.{png,jpg,gif}`,
+            dest: `./${distFolder}/img`,
+            dist: `./${distFolder}/img/*.{png|jpg}`
         }
     };
 
 
 /*======================================================================= TASK ====*/
-function handleError(error) {
-    console.log(error.toString());
-    this.emit('end');
-}
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function () {
-    return gulp.src(path.scss.src)
+    return gulp.src([path.scss.src, '!src/scss/vendor/**'])
         .pipe(bulkSass())
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -62,9 +57,11 @@ gulp.task('sass', function () {
         .pipe(autoprefixer({
             browsers: ['last 5 version', '> 5%']
         }))
-        .pipe(sourcemaps.write('../../maps'))
+        .pipe(sourcemaps.write(mapsFolder))
         .pipe(gulp.dest(path.scss.dest))
-        .pipe(browserSync.stream());
+        .pipe(browserSync.reload({
+            stream: true
+        }));
 });
 
 gulp.task('pug', function () {
@@ -73,21 +70,13 @@ gulp.task('pug', function () {
             pretty: true
         })).on('error', log.error)
         .pipe(gulp.dest(path.pug.dest))
-        .pipe(browserSync.stream());
+        // .pipe(browserSync.stream());
+        .pipe(browserSync.reload({
+            stream: true
+        }));
 })
 
 //js
-
-gulp.task('concat', function () {
-    return gulp.src([
-            './src/js/**/*.js',
-            '!./src/js/custom.js'
-        ])
-        .pipe(sourcemaps.init())
-        .pipe(concat('custom.js'))
-        .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./src/js'));
-})
 
 gulp.task('script', () => {
     // gulp expects tasks to return a stream, so we create one here.
@@ -103,35 +92,36 @@ gulp.task('script', () => {
             loadMaps: true
         }))
         // Add gulp plugins to the pipeline here.
-        .pipe(sourcemaps.write('../../maps'))
-        .pipe(gulp.dest('./dist/js/'));
+        .pipe(uglify()).on('error', log.error)
+        .pipe(sourcemaps.write(mapsFolder))
+        .pipe(gulp.dest(path.js.dest))
+        .pipe(browserSync.reload({
+            stream: true
+        }));
 
     // "globby" replaces the normal "gulp.src" as Browserify
     // creates it's own readable stream.
-    globby(['./src/js/**/*.js' /* ,'!./src/js/vendor' */ ]).then(function (entries) {
+    globby([path.js.src ,'!./src/js/helper/**' ]).then(function (entries) {
         // create the Browserify instance.
         var b = browserify({
             entries: entries,
             debug: true,
-        }).transform(babelify, {
-            presets: ["@babel/preset-env"],
-            minified: true,
-            comments: false
-        });
+        })
+        .transform(
+            "babelify",
+            {
+                presets: ['@babel/env'],
+                minified: true,
+                comments: false
+            }
+        )
+        .transform({
+            global: true,
+        }, globalShim);
 
         // pipe the Browserify stream into the stream we created earlier
         // this starts our gulp pipeline.
         b.bundle()
-            .pipe(source('custom.js'))
-            .pipe(
-                streamify(
-                    babel({
-                        presets: ['@babel/env'],
-                        minified: true,
-                        comments: false
-                    })
-                )
-            ).on('error', log.error)
             .pipe(bundledStream)
     }).catch(function (err) {
         // ensure any errors from globby are handled
@@ -141,6 +131,13 @@ gulp.task('script', () => {
     // finally, we return the stream, so gulp knows when this task is done.
     // console.log(bundledStream)
     return bundledStream;
+});
+
+gulp.task('img', () => {
+
+    gulp.src(path.img.src)
+        .pipe(imagemin())
+        .pipe(gulp.dest(path.img.dest))
 });
 
 gulp.task("BSync", function () {
@@ -157,11 +154,7 @@ gulp.task('watch', ['BSync', 'sass', 'script', 'pug'], function () {
     gulp.watch(path.scss.src, ['sass']);
     gulp.watch([path.js.src, '!./src/js/custom.js'], ['script']);
     gulp.watch('./src/pug/**/*.pug', ['pug']);
-    // gulp.watch(path.scss.dist).on('change', browserSync.reload);
-    gulp.watch(path.scss.dist, browserSync.reload);
     gulp.watch(path.img.dist, browserSync.reload);
-    gulp.watch(path.pug.dist, browserSync.reload);
-    gulp.watch(path.js.dist, browserSync.reload);
 });
 
 gulp.task('build', ['sass', 'script', 'pug']);

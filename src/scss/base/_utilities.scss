@@ -1,4 +1,5 @@
 body.dev {
+    overflow-x: hidden;
     .fixed {
         position: relative !important;
     }
@@ -8,13 +9,12 @@ body.dev {
     }
 }
 
-* {
-    box-sizing: border-box;
-
-    &:before,
-    &:after {
-        box-sizing: border-box;
-    }
+*,
+:after,
+:before,
+input[type=checkbox],
+input[type=radio] {
+    box-sizing: border-box
 }
 
 .overlayBody {

@@ -1,0 +1,20 @@
+block variables
+
+doctype html
+
+html(lang="en")
+    head
+        meta(name="theme-color" content="#5a8cc9")
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+        meta(http-equiv="X-UA-Compatible" content="ie=edge")
+        title eiburu | #{title}
+
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+        link(rel="stylesheet", href="css/style.css")
+    body(class=mode ontouchstart)
+        include ../modules/_header.pug
+        block content 
+        include ../modules/_footer.pug
+    

@@ -3,14 +3,6 @@
   "version": "1.0.0",
   "description": "no",
   "main": "index.js",
-  "browserify-shim": {
-    "jquery": "global:jQuery"
-  },
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,28 +14,24 @@
     "babelify": "^10.0.0",
     "browser-sync": "^2.18.13",
     "browserify": "^16.2.3",
-    "browserify-shim": "^3.8.14",
+    "browserify-global-shim": "^1.0.3",
     "globby": "^8.0.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-browserify": "^0.5.1",
-    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "^5.0.3",
     "gulp-pug": "^4.0.1",
     "gulp-sass": "^3.1.0",
     "gulp-sass-bulk-import": "^1.0.1",
     "gulp-sourcemaps": "^2.6.1",
-    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^3.0.1",
     "gulplog": "^1.0.0",
     "japan-postal-code": "^0.2.0",
     "jquery": "^3.3.1",
+    "owl.carousel2": "^2.2.1",
     "pug": "^2.0.3",
-    "require-context": "^1.1.0",
-    "streamify": "^1.0.0",
     "through2": "^3.0.0",
     "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^2.0.0",
-    "vinyl-transform": "^1.0.0"
+    "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {}
 }

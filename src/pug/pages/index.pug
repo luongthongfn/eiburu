@@ -1,259 +1,305 @@
-extend ../layouts/_index.pug
+extend ../layouts/_layout1.pug
 block variables 
-    - var title =' home'
+    - var title ='home'
+    //- - var mode ='dev'
+    - var mode =''
 block content
     #content
-        section.info#info
-            .title-bg.text-center
-                h2.title INFORMATION
-                p.subtitle お知らせ
-            
+
+        section.banner
+            .banner-top
+                img(src="img/info1-sp.png", alt="info1")
+                p 葵屋株式会社は株式会社エイブルパーキングの<br class="show-sp">アライアンスパートナーです
+            .banner--bg
+                .container
+                    .banner--intro
+                        img(src="img/banner-logo-sp.png", alt="logo")
+                        .banner--intro--text
+                            |駐車場経営なら<br class="show-sp">葵屋にお任せ下さい<br>あなたにもできる<br class="show-sp">堅実の駐車場投資！
+                    .banner--benefit
+                        .banner--benefit--item
+                            .step.dp-top-left
+                                span メリット
+                                span.num 01
+                            .banner--benefit--item--txt
+                                h3 タイトルが入ります
+                                p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+
+                        .banner--benefit--item
+                            .step.dp-top-left
+                                span メリット
+                                span.num 02
+                            .banner--benefit--item--txt
+                                h3 タイトルが入ります
+                                p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+
+                        .banner--benefit--item
+                            .step.dp-top-left
+                                span メリット
+                                span.num 03
+                            .banner--benefit--item--txt
+                                h3 タイトルが入ります
+                                p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+
+
+                    a.readmore(href="") 
+                        span.icon
+                        span.txt
+                            |メールでのお問い合わせ・
+                            |資料請求はこちら           
+
+        section.concern#concern
+            .concern--bg
+                .container
+                    h2.title 土地活用でこんなお悩みはありませんか？
+                    .concern--list
+                        label 
+                            input(type="checkbox" checked)
+                            span.checkbox
+                            |日々の管理が煩わしい
+                        label
+                            input(type="checkbox")
+                            span.checkbox
+                            |初期費用が高い
+                        label
+                            input(type="checkbox")
+                            span.checkbox
+                            |大きな土地を持っていない
+                        label
+                            input(type="checkbox")
+                            span.checkbox
+                            |安定した収入が得られるか不安
+                    .concern--sign
+                        .concern--sign--circle    
+                            span.sign-top 
+                                |１つでも当てはまる <br/>
+                                |ものがあれば
+                            span.sign-bottom
+                                |有効活用の <br/>
+                                |チャンスです！
             .container
-                article.info-arc
-                    .info-time 2018.00.00
-                    .desc
-                        p テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                a.readmore(href="") 
+                    span.icon
+                    span.txt
+                        |メールでのお問い合わせ・
+                        |資料請求はこちら
 
-        section.bussiness#bussiness
-            .title-bg.text-center
-                h2.title bussiness
-                p.subtitle 事業内容
+        section.security#security
+            .container
+                h2.title 安心と信頼の３つの特徴
+                .row
+                    .column
+                        img.show-sp(src="img/secur1-sp.png", alt="security")
+                        img.show-pc(src="img/secur1-pc.png", alt="security")
+                        .column--content
+                            h3.column--title
+                                |同一担当者が相談から契約 <br/>
+                                |までワンストップサポート
+                            p.column--txt
+                                |テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    .column
+                        img.show-sp(src="img/secur2-sp.png", alt="security")
+                        img.show-pc(src="img/secur2-pc.png", alt="security")
+                        .column--content
+                            h3.column--title
+                                |一括借上げで<br/>
+                                |安定した収入を実現
+                            p.column--txt
+                                |テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                    .column
+                        img.show-sp(src="img/secur3-sp.png", alt="security")
+                        img.show-pc(src="img/secur3-pc.png", alt="security")
+                        .column--content
+                            h3.column--title
+                                |一元的ではない<br/>
+                                |恒久的な土地活用支援
+                            p.column--txt
+                                |テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+                a.readmore(href="") 
+                    span.icon
+                    span.txt
+                        |メールでのお問い合わせ・
+                        |資料請求はこちら
 
-            .bussiness-top
-                .container
-                    .bussiness-desc
-                        p 
-                            | 2015年に産声をあげた葵屋は、大手クライアント様が抱える多岐にわたった悩みや要求に対してITを通じて相手目線に立った改善提案から解決を図り、企業の更なる発展と成長に貢献している会社です。
-                            | “誰かの幸せを実現することが、我々の幸せに直結する”を合言葉に、関わる全ての想いを紡いだミライへのシナジーを体現しています。
-                    img.diagram(src="img/diagram.png", alt="alt_text")
+        section.research#research
+            .container
+                h2.title 導入事例
+                .case-container
+                    -
+                        var arr = [
+                            {
+                                title: '月極駐車場とコインパーキングの併用',
+                                before: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+                                after:'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト'
+                            },
+                            {
+                                title: '更地からコインパーキングの経営',
+                                before: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+                                after:'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト'
+                            },
+                            {
+                                title: '月極駐車場とコインパーキングの併用',
+                                before: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+                                after:'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト'
+                            },
+                            {
+                                title: '更地からコインパーキングの経営',
+                                before: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+                                after:'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト'
+                            },
+                            {
+                                title: '月極駐車場とコインパーキングの併用',
+                                before: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+                                after:'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト'
+                            },
+                            {
+                                title: '更地からコインパーキングの経営',
+                                before: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+                                after:'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト'
+                            },
+                        ];
+                    -
+                    - for (var i = 0; i < 6; ++i) {
+                        .research--case
+                            h3.research--case--title 
+                                span.num CASE.0#{i+1}
+                                span.txt #{arr[i].title}
+                            .slider-case.owl-carousel
+                                .research--case--before
+                                    img(src="img/case1bf.png", alt="case1")
+                                    .case-content
+                                        .badget Before
+                                        p #{arr[i].before}
+                                .research--case--after
+                                    img(src="img/case1af.png", alt="case1")
+                                    .case-content
+                                        .badget After
+                                        p #{arr[i].after}
+                    - }                    
+                a.readmore(href="") 
+                    span.icon
+                    span.txt
+                        |メールでのお問い合わせ・
+                        |資料請求はこちら            
 
-            .bussiness-bottom
-                .bussiness-department
-                    .department-label
-                        img(src="img/label1-bg.png", alt="")
-                        .dp-mid-center
-                            img(src="img/i-agent.png" alt="")
-                            h3 agent
-                       
-                    .department-summary
-                        h4.department-summary--heading エージェント事業
-                        p ”業務効率化”と”機会創出”の実現
-                        a.arrow-down.go-to(href="#agent")
-                            img(src="img/i-arrow-down-depart.png" alt="")
+        section.procedure#procedure
+            .container
+                h2.title 開始までの流れ
+                .procedure--container
+                    .procedure--item
+                        img(src="img/i-proced1.png", alt="procedure")
+                        .procedure--item--content
+                            h3.procedure--title 受付
+                            p テキストテキストテキストテキストテキストテキストテキストテキストテキテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    .procedure--item
+                        img(src="img/i-proced2.png", alt="procedure")
+                        .procedure--item--content
+                            h3.procedure--title 調査<br class="show-sp"/><span class="show-pc">・</span>訪問
+                            p テキストテキストテキストテキストテキストテキストテキストテキストテキテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    .procedure--item
+                        img(src="img/i-proced3.png", alt="procedure")
+                        .procedure--item--content
+                            h3.procedure--title 契約
+                            p テキストテキストテキストテキストテキストテキストテキストテキストテキテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    .procedure--item
+                        img(src="img/i-proced4.png", alt="procedure")
+                        .procedure--item--content
+                            h3.procedure--title 着工<br class="show-sp"/><span class="show-pc">・</span>完成
+                            p テキストテキストテキストテキストテキストテキストテキストテキストテキテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    .procedure--item
+                        img(src="img/i-proced5.png", alt="procedure")
+                        .procedure--item--content
+                            h3.procedure--title 運営<br class="show-sp"/><span class="show-pc">・</span>管理
+                            p テキストテキストテキストテキストテキストテキストテキストテキストテキテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                p.procedure--note エイブルパーキングと葵屋が<br class="show"/>オーナー様のお悩みに<br class="show-sp"/>即時に対応、解決致します！
+                a.readmore(href="") 
+                    span.icon
+                    span.txt
+                        |メールでのお問い合わせ・
+                        |資料請求はこちら    
 
-                .bussiness-department
-                    .department-label
-                        <img src="img/label2-bg.png" alt="">
-                        .dp-mid-center
-                            <img src="img/i-hr.png" alt="">
-                            h3 HUMAN RESOURCE
-                      
-                    .department-summary
-                        h4.department-summary--heading ヒューマンリソース事業
-                        p 総合的なITリソースプロポーザル
-                        a.arrow-down.go-to(href="#humanresource")
-                            img(src="img/i-arrow-down-depart.png" alt="")
-                   
-                .bussiness-department
-                    .department-label
-                        <img src="img/label3-bg.png" alt="">
-                        .dp-mid-center
-                            <img src="img/i-evaluation.png" alt="">
-                            h3 EVALUATION
-                       
-                    .department-summary
-                        h4.department-summary--heading 検証・評価事業
-                        p トータルクオリティ向上に貢献
-                        a.arrow-down.go-to(href="#evaluation")
-                            <img src="img/i-arrow-down-depart.png" alt="">
-
-                .bussiness-department
-                    .department-label
-                        <img src="img/label4-bg.png" alt="">
-                        .dp-mid-center
-                            <img src="img/i-operation.png" alt="">
-                            h3 OPERATION
-                       
-                    .department-summary
-                        h4.department-summary--heading オペレーション事業
-                        p 検索トレンドとマーケットニーズに基づく <br class="show-pc">ワンストップサポート
-                        a.arrow-down.go-to(href="#operation")
-                            <img src="img/i-arrow-down-depart.png" alt="">
-
-            .depart-content
-                .container
-                    .depart-card#agent
-                        h3.depart-card--heading
-                            .icon
-                                <img src="img/i-agent.png" alt="alt_text">
-                            span エージェント事業
-                        
-                        p.depart-txt
-                            | クライアントが抱える多様なニーズに応えるべく、高品質を重視したオペレーションやカスタマイズ可能なテレマーケティング体制を充実。
-                            | 加えてWEB集客(デジタルマーケティング)とFace To Faceによるプレゼンテーションの両輪で有意義且つ効果の高いサービスを提供します。
-
-                    .depart-card#humanresource
-                        h3.depart-card--heading
-                            .icon
-                                <img src="img/i-hr.png" alt="alt_text">
-                            span ヒューマンリソース事業
-                       
-                        p.depart-txt
-                            | 経験豊富な弊社コンサルタントが徹底的なヒアリングを通じて、クライアントの要求・課題・将来像を的確に把握。
-                            | マーケットニーズに則した全技術戦略の策定とサービス全体の効率化及びトータルアウトソースによるコストメリットの最大化を図ります。
-
-                    .depart-card#evaluation
-                        h3.depart-card--heading
-                            .icon
-                                <img src="img/i-evaluation.png" alt="alt_text">
-                            span 検証・評価事業
-                        
-                        p.depart-txt
-                            | 近年、複雑且つ大規模化する製品開発工程において、弊社では上流フェーズから品質管理計画作成やテストプロセス改善を実施することで品質に関わる課題解決を図ります。
-                            | また、IoTの導入やスマートデバイスの普及により負担が増えるセキュリティ管理コストを弊社QAサービスが低減してまいります。
-
-                    .depart-card#operation
-                        h3.depart-card--heading 
-                            .icon
-                                <img src="img/i-operation.png" alt="alt_text">
-                            span オペレーション事業
-                        
-                        p.depart-txt
-                            | 各種WEBサービスに関する最適なコンテンツ企画をはじめ、専門のアクティングスペシャリストが対ユーザーへの訴求効果向上や様々な広告手法を用いたマネタイズ施策、そして、スピードを担保した日次のコンテンツ更新作業を包| 括的に対応します。
-                       
-        section.recruit#recruit
-            .title-bg.text-center
-                h2.title recruit
-                p.subtitle 採用情報
-
-            .recruit-box
-                a.recruit-link(href="/renew/recruit/index.html") 採用情報
-                img.show-sp.w1(src="img/recruit-bg-sp.png" alt="alt_text")
-                img.show-pc.w1(src="img/recruit-bg-pc.png" alt="alt_text")
-
-        section.outline#outline
-            .title-bg.text-center
-                h2.title outline 
-                p.subtitle 会社概要 
-
-            .outline-bg
-                .container.outline--table
-                    .outline-row
-                        .left 会社名
-                        .right 葵屋株式会社
-
-                    .outline-row
-                        .left 設立日
-                        .right 2015年2月2日
-
-                    .outline-row
-                        .left 代表者
-                        .right 佃　一樹
-                      
-                    .outline-row
-                        .left 事業内容
-                        .right 営業代行事業、HR事業、運用代行事業、WEB制作事業、検証・評価事業
-                     
-                    .outline-row
-                        .left 電話番号
-                        .right 044-221-9662
-                      
-                    .outline-row
-                        .left メール <br class="show-sp">アドレス
-                        .right info@aoiyakk.com
-                    
-                    .outline-row
-                        .left 事業内容
-                        .right
-                            | 営業代行事業、HR事業、運用代行事業
-                            | WEB制作事業、検証・評価事業
-                      
-                    .outline-row
-                        .left 所在地
-                        .right
-                            | 〒210-0023　神奈川県川崎市川崎区
-                            | 小川町15-13　川崎トーセイビル8階
-                      
-                    .outline-row
-                        .left 取得資格
-                        .right 一般労働者派遣事業許可
-
-        section.access#access
-            .title-bg.text-center
-                h2.title access
-                p.subtitle アクセス
-
-            .access--box
-                .access--heading
-                    h3.heading-top 葵屋 株式会社
-                    p.heading-bot AOIYA
-                .access--map#googleMap
+        section.question#question
+            .container
+                h2.title よくある質問
+                ul.quest-list.collapse-container
+                    li.quest-item.collapse.collapse-show
+                        h3.quest-title 
+                            img(src="img/i-quest.png", alt="question")
+                            span テキストテキストテキストテキストテキスト
+                        p.quest-answer.collapse-item テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    li.quest-item.collapse
+                        h3.quest-title 
+                            img(src="img/i-quest.png", alt="question")
+                            span テキストテキストテキストテキストテキスト
+                        p.quest-answer.collapse-item テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    li.quest-item.collapse
+                        h3.quest-title 
+                            img(src="img/i-quest.png", alt="question")
+                            span テキストテキストテキストテキストテキスト
+                        p.quest-answer.collapse-item テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    li.quest-item.collapse
+                        h3.quest-title 
+                            img(src="img/i-quest.png", alt="question")
+                            span テキストテキストテキストテキストテキスト
+                        p.quest-answer.collapse-item テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    li.quest-item.collapse
+                        h3.quest-title 
+                            img(src="img/i-quest.png", alt="question")
+                            span テキストテキストテキストテキストテキスト
+                        p.quest-answer.collapse-item テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                a.readmore(href="") 
+                    span.icon
+                    span.txt
+                        |メールでのお問い合わせ・
+                        |資料請求はこちら  
 
         section.contact#contact
-            .title-bg.text-center
-                h2.title contact
-                p.subtitle お問い合わせ
+            .container
+                h2.title お問い合わせ
 
-            .contact--bg
-                .contact--wrapper.container
-                    div.notice-error 入力内容に誤りがあります。
-                    h3.form-name ※全て必須項目です
+                .form-container
+                    p.contact-desc テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+
+                    .flr.form-require ※は入力必須項目です
+                    .clb
 
                     //- <!-- ajax form url in custom.js-->
                     form.contact--form#contact--form(action="" method="POST")
-                        label
-                            span お問い合わせ項目
-                            div.custom-select
-                                input#request_hidden(type="hidden" name="request_hidden")
-                                div.input#request 項目を選択してください
-                                ul
-                                    li.selected(data-value="葵屋のサービスについて") 葵屋のサービスについて
-                                    li(data-value="採用について ") 採用について 
-                                    li(data-value="ビジネスパートナーについて") ビジネスパートナーについ
-                                    li(data-value="その他お問い合わせ") その他お問い合わせ
-                        label
-                            span お名前
-                            input#name(type="text" name="name")            
-                        label
-                            span 貴社名/部署名
-                            input#company(type="text" name="company")
-                        label
-                            span メールアドレス
-                            input#email(type="email" name="email")
-                        label
-                            span お問い合わせ内容
-                            textarea#question(name="question" cols="30" rows="7")
-                        button.contact-submit#contact-submit(type="submit") 送信<i class="fa fa-spin"></i>
-                  
-                #js_contact_confirm
-                    .contact--wrapper.container
-                        .review-content.review-request
-                            p.review-title お問い合わせ項目
-                            p.review-text テキストテキストテキストテキストテキスト
+                        table.contact-table
+                            tr
+                                td: span 会社名
+                                td: input#copany(type="text" name="company")   
+                            tr
+                                td: span お名前 <span class="flr">※</span>
+                                td: input#name(type="text" name="name")            
+                            tr
+                                td: span 郵便番号
+                                td.td-zipcode
+                                    input#zipcode(type="tel" name="zipcode")
+                                    button.get-zipcode(type="button") 郵便番号で住所検索
+                            tr
+                                td: span ご住所
+                                td: textarea#address(name="address" rows="3")
+                            tr
+                                td: span 電話番号<span class="flr">※</span>
+                                td: input#phone(type="tel" name="phone")
+                            tr
+                                td: span FAX番号
+                                td: input#fax(type="tel" name="fax")
+                            tr
+                                td: span メールアドレス<span class="flr">※</span>
+                                td: input#email(type="email" name="email")
+                            tr
+                                td: span メールアドレス<br class="show-pc"/>（確認用)<span class="flr">※</span>
+                                td: input#re_email(type="email" name="re_email")
+                            tr
+                                td: span お問い合わせ内容<span class="flr">※</span>
+                                td: textarea#question(name="question" cols="30" rows="5")
+                            tr
+                                td.td-submit(colspan=2)
+                                    p.before-submit
+                                        |入力内容をご確認の上、<br class="show-sp"/>宜しければ送信ボタンを押してください。
+                                    button.contact-submit#contact-submit(type="submit") 
+                                        img(src="img/i-send.png", alt="isend")
+                                        |送信<i class="fa fa-spin"></i>
 
-                        .review-content.review-name
-                            p.review-title お名前
-                            p.review-text テキストテキスト
-
-                        .review-content.review-company
-                            p.review-title 貴社名/部署名
-                            p.review-text テキストテキスト
-
-                        .review-content.review-email
-                            p.review-title メールアドレス
-                            p.review-text テキストテキスト
-
-                        .review-content.review-question
-                            p.review-title お問い合わせ内容
-                            p.review-text テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
-
-                        .review-bottom
-                            .confirm-title 上記内容で送信しますか？
-                            .confirm-btn
-                                button.btn_cancel_send キャンセル
-                                button.btn_accept_send 送信
-
-        section.view-map
-            a(href=""): img.w1(src="img/gg-view.png" alt="alt_text")
-            a(href=""): img.w1(src="img/map-view.png" alt="alt_text")
-    
